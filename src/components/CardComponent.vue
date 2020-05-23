@@ -19,6 +19,12 @@
 
       <v-card-actions>
         <v-btn color="orange" text>Share</v-btn>
+        {{ timePicker1 }}
+        <TimePicker
+          v-model="timePicker1"
+          :label="'END TIME'"
+          :time24hr="true"
+        />
 
         <v-btn color="orange" text>Explore</v-btn>
       </v-card-actions>
@@ -27,11 +33,15 @@
 </template>
 
 <script>
+import TimePicker from './TimePicker'
 export default {
-  name: "CardComponent",
+  name: 'CardComponent',
+  components: {
+    TimePicker,
+  },
 
   data: () => ({
-    //
-  })
-};
+    timePicker1: '',
+  }),
+}
 </script>

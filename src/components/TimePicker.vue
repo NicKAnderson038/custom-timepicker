@@ -1,13 +1,14 @@
 <template>
   <div>
-    <v-btn icon class="caret" @click="show = true">
-      <v-icon color="sbdYellow" class="caret--size">fas fa-clock</v-icon>
+    <v-btn icon color="orange" class="caret" @click="show = true">
+      <!-- <v-icon color="red" class="caret--size">fas fa-clock</v-icon> -->
+      <v-icon class="caret--size">mdi-clock</v-icon>
     </v-btn>
     <v-dialog v-model="show" max-width="360">
       <div class="time--container">
         <v-card>
           <v-card-text
-            class="sbdYellow text-uppercase headline text-xs-center yellow-height-caret"
+            class="primary text-uppercase headline text-xs-center yellow-height-caret"
           >
             <h2 class="body-1 label--prop">{{ label }}</h2>
             <v-icon
@@ -32,37 +33,35 @@
             </v-btn>
           </v-card-text>
           <v-card-text
-            class="sbdYellow text-uppercase headline text-xs-center yellow-height"
+            class="primary text-uppercase headline text-xs-center yellow-height"
           >
             <div class="input--rows">
               <v-select
                 light
-                outline
                 block
+                solo
                 v-model="hour"
                 :items="hours"
                 color="black--text"
                 class="black--text time--text"
-                background-color="black"
                 menu-props="auto"
                 hide-details
               ></v-select>
               <h1 class="colon">:</h1>
               <v-select
                 light
-                outline
                 block
+                solo
                 v-model="minute"
                 :items="minutes"
                 color="black--text"
                 class="black--text time--text"
-                background-color="black"
                 menu-props="auto"
               ></v-select>
             </div>
           </v-card-text>
           <v-card-text
-            class="sbdYellow text-uppercase headline text-xs-center yellow-height-caret yellow-height-caret-last"
+            class="primary text-uppercase headline text-xs-center yellow-height-caret yellow-height-caret-last"
           >
             <v-radio-group
               v-if="!time24hr"
@@ -103,9 +102,11 @@
             </v-btn>
           </v-card-text>
           <v-tabs
+            :style="{ width: '300px' }"
             fixed-tabs
             color="sbdBlackGrey"
-            slider-color="sbdYellow"
+            centered
+            slider-color="primary"
             v-model="tab"
             :class="tabUnderline[tabUnderlineIndex]"
           >
@@ -114,50 +115,54 @@
               :key="item.tab"
               @click="() => currentTabHandler(item.tab)"
               :class="`tab--placement-${i}`"
-              >{{ $i18n.t(item.tab) }}</v-tab
+              >{{ item.tab }}</v-tab
             >
           </v-tabs>
-          <v-card-actions
+          <!-- <v-card-actions
             class="sbdBlackGrey"
-            :style="{ paddingBottom: '10px', paddingTop: '10px' }"
-          >
-            <div class="key--pad">
-              <div
-                class="d-flex flex-row justify-space-between key--row"
-                v-for="(numberButtons, i) in keyPad"
-                :key="`row-${i}-main`"
+            :style="{
+              paddingBottom: '10px',
+              paddingTop: '10px',
+              width: '360px',
+            }"
+          > -->
+          <div class="key--pad">
+            <div
+              class="d-flex flex-row justify-space-between key--row"
+              v-for="(numberButtons, i) in keyPad"
+              :key="`row-${i}-main`"
+            >
+              <v-btn
+                class="key--btn"
+                v-for="numberButton in numberButtons"
+                :key="`row-0-${numberButton}`"
+                color="sbdLightGrey"
+                outlined
+                block
+                @click="() => captureButtons(numberButton)"
+                >{{ numberButton }}</v-btn
               >
-                <v-btn
-                  v-for="numberButton in numberButtons"
-                  :key="`row-0-${numberButton}`"
-                  color="sbdLightGrey"
-                  large
-                  outline
-                  block
-                  @click="() => captureButtons(numberButton)"
-                  >{{ numberButton }}</v-btn
-                >
-              </div>
-              <div class="d-flex flex-row justify-space-between key--row">
-                <v-btn
-                  color="sbdLightGrey"
-                  large
-                  outline
-                  block
-                  @click="() => captureButtons('0')"
-                  >0</v-btn
-                >
-                <v-btn
-                  color="sbdLightGrey"
-                  large
-                  outline
-                  block
-                  @click.stop="clear"
-                  >CLEAR</v-btn
-                >
-              </div>
             </div>
-          </v-card-actions>
+            <div class="d-flex flex-row justify-space-between key--row--last">
+              <v-btn
+                class="key--btn"
+                color="sbdLightGrey"
+                outlined
+                block
+                @click="() => captureButtons('0')"
+                >0</v-btn
+              >
+              <v-btn
+                class="key--btn"
+                color="sbdLightGrey"
+                outlined
+                block
+                @click.stop="clear"
+                >CLEAR</v-btn
+              >
+            </div>
+          </div>
+          <!-- </v-card-actions> -->
         </v-card>
       </div>
     </v-dialog>
@@ -359,7 +364,7 @@ export default {
 
 /* HH:mm colon*/
 .colon {
-  color: black;
+  color: #fff;
   padding-left: 6px;
   padding-right: 6px;
   position: relative;
@@ -367,7 +372,7 @@ export default {
   user-select: none;
 }
 
-/* sbdYellow container */
+/* primary container */
 .time--text > .v-input__control > .v-input__slot {
   min-height: 100px;
 }
@@ -466,5 +471,15 @@ export default {
 
 .key--row {
   padding: 5px 10px 5px 10px;
+  max-width: 126px;
+}
+
+.key--row--last {
+  padding: 5px 10px 5px 10px;
+  max-width: 183px;
+}
+
+.key--btn {
+  margin: 4px;
 }
 </style>
