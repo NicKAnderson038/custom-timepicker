@@ -43,6 +43,9 @@ npm run build || yarn build
 git add dist && git commit -m "Initial dist subtree commit" --no-verify
 
 git subtree push --prefix dist origin gh-pages
+
+# rm gh-pages and redo steps above for changes
+git push origin --delete gh-pages
 ```
 
 #

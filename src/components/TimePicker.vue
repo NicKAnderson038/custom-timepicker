@@ -16,26 +16,13 @@
               color="black"
               class="caret times--icon"
               @click.stop="show = false"
-              >fas fa-times-circle</v-icon
-            >
+            >fas fa-times-circle</v-icon>
             <div class="d-flex flex-row justify-center">
-              <v-btn
-                icon
-                class="caret"
-                @click="() => changeTime('INCREASE', 'hour', maxTime)"
-              >
-                <v-icon color="black" class="caret--size"
-                  >fas fa-caret-up</v-icon
-                >
+              <v-btn icon class="caret" @click="() => changeTime('INCREASE', 'hour', maxTime)">
+                <v-icon color="black" class="caret--size">fas fa-caret-up</v-icon>
               </v-btn>
-              <v-btn
-                icon
-                class="caret"
-                @click="() => changeTime('INCREASE', 'minute', '60')"
-              >
-                <v-icon color="black" class="caret--size"
-                  >fas fa-caret-up</v-icon
-                >
+              <v-btn icon class="caret" @click="() => changeTime('INCREASE', 'minute', '60')">
+                <v-icon color="black" class="caret--size">fas fa-caret-up</v-icon>
               </v-btn>
             </div>
           </div>
@@ -75,43 +62,16 @@
               `${color} text-uppercase headline text-xs-center yellow-height-caret yellow-height-caret-last`
             "
           >
-            <v-radio-group
-              v-if="!time24hr"
-              v-model="timeAmPm"
-              column
-              class="am--pm--radios"
-            >
-              <v-radio
-                color="black"
-                class="am--pm--radio"
-                label="AM"
-                value="AM"
-              ></v-radio>
-              <v-radio
-                color="black"
-                class="am--pm--radio"
-                label="PM"
-                value="PM"
-              ></v-radio>
+            <v-radio-group v-if="!time24hr" v-model="timeAmPm" column class="am--pm--radios">
+              <v-radio color="black" class="am--pm--radio" label="AM" value="AM"></v-radio>
+              <v-radio color="black" class="am--pm--radio" label="PM" value="PM"></v-radio>
             </v-radio-group>
             <div class="d-flex flex-row justify-center">
-              <v-btn
-                icon
-                class="caret"
-                @click="() => changeTime('DECREASE', 'hour', maxTime)"
-              >
-                <v-icon color="black" class="caret--size"
-                  >fas fa-caret-down</v-icon
-                >
+              <v-btn icon class="caret" @click="() => changeTime('DECREASE', 'hour', maxTime)">
+                <v-icon color="black" class="caret--size">fas fa-caret-down</v-icon>
               </v-btn>
-              <v-btn
-                icon
-                class="caret"
-                @click="() => changeTime('DECREASE', 'minute', '60')"
-              >
-                <v-icon color="black" class="caret--size"
-                  >fas fa-caret-down</v-icon
-                >
+              <v-btn icon class="caret" @click="() => changeTime('DECREASE', 'minute', '60')">
+                <v-icon color="black" class="caret--size">fas fa-caret-down</v-icon>
               </v-btn>
             </div>
           </v-card-text>
@@ -122,19 +82,33 @@
                 text
                 color="orange"
                 @click="() => currentTabHandler(time[0])"
-                >{{ time[0] }}</v-btn
-              >
+              >{{ time[0] }}</v-btn>
               <v-btn
                 class="key--btn"
                 text
                 color="orange"
                 @click="() => currentTabHandler(time[1])"
-                >{{ time[1] }}</v-btn
-              >
+              >{{ time[1] }}</v-btn>
+            </div>
+            <div class="key--rows">
+              <div class="key--row" v-for="(numberButtons, i) in keyPad" :key="`row-${i}-main`">
+                <v-btn
+                  class="key--btn"
+                  v-for="numberButton in numberButtons"
+                  :key="`row-0-${numberButton}`"
+                  :color="color"
+                  outlined
+                  block
+                  large
+                  @click="() => captureButtons(numberButton)"
+                >
+                  <span :style="{ color: 'black' }">{{ numberButton }}</span>
+                </v-btn>
+              </div>
             </div>
             <div
-              class="d-flex flex-row justify-space-between key--row"
-              v-for="(numberButtons, i) in keyPad"
+              class="key--row--last"
+              v-for="(numberButtons, i) in keyPadEnd"
               :key="`row-${i}-main`"
             >
               <v-btn
@@ -145,31 +119,12 @@
                 outlined
                 block
                 large
-                @click="() => captureButtons(numberButton)"
-                ><span :style="{ color: 'black' }">{{
-                  numberButton
-                }}</span></v-btn
+                @click="
+                    () => (i === 0 ? captureButtons(numberButton) : clear())
+                  "
               >
-            </div>
-            <div class="d-flex flex-row justify-space-between key--row--last">
-              <v-btn
-                class="key--btn"
-                :color="color"
-                outlined
-                block
-                large
-                @click="() => captureButtons('0')"
-                ><span :style="{ color: 'black' }">0</span></v-btn
-              >
-              <v-btn
-                class="key--btn"
-                :color="color"
-                outlined
-                block
-                large
-                @click.stop="clear"
-                ><span :style="{ color: 'black' }">CLEAR</span></v-btn
-              >
+                <span :style="{ color: 'black' }">{{ numberButton }}</span>
+              </v-btn>
             </div>
           </div>
         </v-card>
@@ -218,10 +173,11 @@ export default {
       currentTab: 'hours',
       time: ['hours', 'minutes'],
       keyPad: [
-        ['1', '2', '3'],
-        ['4', '5', '6'],
-        ['7', '8', '9'],
+        ['1', '4', '7'],
+        ['2', '5', '8'],
+        ['3', '6', '9'],
       ],
+      keyPadEnd: [['0', 'Clear']],
       maxTime: this.time24hr ? '24' : '12',
       timeAmPm: 'AM',
     }
@@ -316,7 +272,6 @@ export default {
 /* Label prop */
 .label--prop {
   position: absolute;
-  /* top: 50px; */
   color: black;
   padding-left: 6px;
   white-space: nowrap;
@@ -353,7 +308,6 @@ export default {
 /* Close modal icon */
 .times--icon {
   position: absolute;
-  /* top: 26px; */
   display: block;
   left: 80%;
   padding: 6px;
@@ -426,10 +380,7 @@ export default {
   > .v-input__slot
   > .v-select__slot
   > .v-select__selections {
-  /* color: black !important; */
   font-size: 50px;
-  /* top: 14px; */
-  /* position: absolute; */
 }
 
 .time--text
@@ -456,14 +407,21 @@ export default {
   width: 100%;
 }
 
+.key--rows {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 .key--row {
-  padding: 2px 10px 2px 10px;
-  max-width: 139px;
+  padding: 2px 10px 2px 2px;
+  width: 100%;
 }
 
 .key--row--last {
-  padding: 2px 10px 2px 10px;
-  max-width: 202px;
+  padding: 2px 10px 2px 2px;
+  display: flex;
+  width: 50.5%;
 }
 
 .key--btn {
