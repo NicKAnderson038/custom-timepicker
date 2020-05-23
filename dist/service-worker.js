@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.14c455a59d872f82f566a5e4bace7055.js"
+  "/custom-timepicker/precache-manifest.56184b03697fd0d2774c38ad6b0ccccd.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "custom-timepicker"});
