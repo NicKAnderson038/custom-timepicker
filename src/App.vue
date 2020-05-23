@@ -23,7 +23,11 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn href="https://github.com/vuetifyjs/vuetify/releases/latest" target="_blank" text>
+      <v-btn
+        href="https://github.com/NicKAnderson038/custom-timepicker"
+        target="_blank"
+        text
+      >
         <span class="mr-2">GitHub</span>
         <v-icon>mdi-open-in-new</v-icon>
       </v-btn>
@@ -36,17 +40,17 @@
 </template>
 
 <script>
-import CardComponent from "./components/CardComponent";
+import CardComponent from './components/CardComponent'
 
 export default {
-  name: "App",
+  name: 'App',
 
   components: {
-    CardComponent
+    CardComponent,
   },
 
   data: () => ({
     //
-  })
-};
+  }),
+}
 </script>
