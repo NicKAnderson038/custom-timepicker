@@ -6,27 +6,37 @@
         height="200px"
         src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
       >
-        <v-card-title>Top 10 Australian beaches</v-card-title>
+        <v-card-title>{{ title.toUpperCase() }}</v-card-title>
       </v-img>
 
-      <v-card-subtitle class="pb-0">Number 10</v-card-subtitle>
+      <v-card-subtitle class="pb-0">
+        <v-icon class="caret--size">mdi-clock</v-icon
+        >{{ subTitle }}</v-card-subtitle
+      >
 
       <v-card-text class="text--primary">
-        <div>Whitehaven Beach</div>
-
-        <div>Whitsunday Island, Whitsunday Islands</div>
+        <ul v-for="feature in features" :key="feature.replace(/ /, '-')">
+          <li>{{ feature }}</li>
+        </ul>
       </v-card-text>
 
       <v-card-actions>
-        <v-btn color="orange" text>Share</v-btn>
-        {{ timePicker1 }}
+        <v-text-field :label="labels[0]" :color="color[0]" :value="timePicker1">
+        </v-text-field>
         <TimePicker
           v-model="timePicker1"
-          :label="'END TIME'"
+          :label="labels[0]"
           :time24hr="true"
+          :color="color[0]"
         />
-
-        <v-btn color="orange" text>Explore</v-btn>
+        <v-text-field :label="labels[1]" :color="color[1]" :value="timePicker2">
+        </v-text-field>
+        <TimePicker
+          v-model="timePicker2"
+          :label="labels[0]"
+          :time24hr="false"
+          :color="color[1]"
+        />
       </v-card-actions>
     </v-card>
   </v-container>
@@ -41,7 +51,17 @@ export default {
   },
 
   data: () => ({
+    title: 'Custom Time Picker',
+    subTitle: 'Time Picker Features',
     timePicker1: '',
+    color: ['success', 'error', 'primary', 'warning'],
+    timePicker2: '',
+    labels: ['Start Time', 'End Time'],
+    features: [
+      'Automatic time validation',
+      '24hr and 12hr time formats',
+      'Primary colors (blue, red, green, orange)',
+    ],
   }),
 }
 </script>

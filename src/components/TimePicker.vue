@@ -1,39 +1,49 @@
 <template>
   <div>
-    <v-btn icon color="orange" class="caret" @click="show = true">
-      <!-- <v-icon color="red" class="caret--size">fas fa-clock</v-icon> -->
+    <v-btn icon :color="color" @click="show = true">
       <v-icon class="caret--size">mdi-clock</v-icon>
     </v-btn>
-    <v-dialog v-model="show" max-width="360">
+    <v-dialog v-model="show" max-width="400">
       <div class="time--container">
         <v-card>
-          <v-card-text
-            class="primary text-uppercase headline text-xs-center yellow-height-caret"
+          <div
+            :class="
+              `${color} text-uppercase headline text-xs-center yellow-height-caret`
+            "
           >
-            <h2 class="body-1 label--prop">{{ label }}</h2>
+            <h2 class="body-1 label--prop">{{ label.toUpperCase() }}</h2>
             <v-icon
               color="black"
               class="caret times--icon"
               @click.stop="show = false"
-              >far fa-times-circle</v-icon
+              >fas fa-times-circle</v-icon
             >
-            <v-btn
-              icon
-              class="caret"
-              @click="() => changeTime('INCREASE', 'hour', maxTime)"
-            >
-              <v-icon color="black" class="caret--size">fas fa-caret-up</v-icon>
-            </v-btn>
-            <v-btn
-              icon
-              class="caret"
-              @click="() => changeTime('INCREASE', 'minute', '60')"
-            >
-              <v-icon color="black" class="caret--size">fas fa-caret-up</v-icon>
-            </v-btn>
-          </v-card-text>
+            <div class="d-flex flex-row justify-center">
+              <v-btn
+                icon
+                class="caret"
+                @click="() => changeTime('INCREASE', 'hour', maxTime)"
+              >
+                <v-icon color="black" class="caret--size"
+                  >fas fa-caret-up</v-icon
+                >
+              </v-btn>
+              <v-btn
+                icon
+                class="caret"
+                @click="() => changeTime('INCREASE', 'minute', '60')"
+              >
+                <v-icon color="black" class="caret--size"
+                  >fas fa-caret-up</v-icon
+                >
+              </v-btn>
+            </div>
+          </div>
+          <!-- </v-card-text> -->
           <v-card-text
-            class="primary text-uppercase headline text-xs-center yellow-height"
+            :class="
+              `${color} text-uppercase headline text-xs-center yellow-height`
+            "
           >
             <div class="input--rows">
               <v-select
@@ -61,7 +71,9 @@
             </div>
           </v-card-text>
           <v-card-text
-            class="primary text-uppercase headline text-xs-center yellow-height-caret yellow-height-caret-last"
+            :class="
+              `${color} text-uppercase headline text-xs-center yellow-height-caret yellow-height-caret-last`
+            "
           >
             <v-radio-group
               v-if="!time24hr"
@@ -82,51 +94,44 @@
                 value="PM"
               ></v-radio>
             </v-radio-group>
-            <v-btn
-              icon
-              class="caret"
-              @click="() => changeTime('DECREASE', 'hour', maxTime)"
-            >
-              <v-icon color="black" class="caret--size"
-                >fas fa-caret-down</v-icon
+            <div class="d-flex flex-row justify-center">
+              <v-btn
+                icon
+                class="caret"
+                @click="() => changeTime('DECREASE', 'hour', maxTime)"
               >
-            </v-btn>
-            <v-btn
-              icon
-              class="caret"
-              @click="() => changeTime('DECREASE', 'minute', '60')"
-            >
-              <v-icon color="black" class="caret--size"
-                >fas fa-caret-down</v-icon
+                <v-icon color="black" class="caret--size"
+                  >fas fa-caret-down</v-icon
+                >
+              </v-btn>
+              <v-btn
+                icon
+                class="caret"
+                @click="() => changeTime('DECREASE', 'minute', '60')"
               >
-            </v-btn>
+                <v-icon color="black" class="caret--size"
+                  >fas fa-caret-down</v-icon
+                >
+              </v-btn>
+            </div>
           </v-card-text>
-          <v-tabs
-            :style="{ width: '300px' }"
-            fixed-tabs
-            color="sbdBlackGrey"
-            centered
-            slider-color="primary"
-            v-model="tab"
-            :class="tabUnderline[tabUnderlineIndex]"
-          >
-            <v-tab
-              v-for="(item, i) in items"
-              :key="item.tab"
-              @click="() => currentTabHandler(item.tab)"
-              :class="`tab--placement-${i}`"
-              >{{ item.tab }}</v-tab
-            >
-          </v-tabs>
-          <!-- <v-card-actions
-            class="sbdBlackGrey"
-            :style="{
-              paddingBottom: '10px',
-              paddingTop: '10px',
-              width: '360px',
-            }"
-          > -->
           <div class="key--pad">
+            <div class="d-flex flex-row justify-center">
+              <v-btn
+                class="key--btn"
+                text
+                color="orange"
+                @click="() => currentTabHandler(time[0])"
+                >{{ time[0] }}</v-btn
+              >
+              <v-btn
+                class="key--btn"
+                text
+                color="orange"
+                @click="() => currentTabHandler(time[1])"
+                >{{ time[1] }}</v-btn
+              >
+            </div>
             <div
               class="d-flex flex-row justify-space-between key--row"
               v-for="(numberButtons, i) in keyPad"
@@ -136,33 +141,37 @@
                 class="key--btn"
                 v-for="numberButton in numberButtons"
                 :key="`row-0-${numberButton}`"
-                color="sbdLightGrey"
+                :color="color"
                 outlined
                 block
+                large
                 @click="() => captureButtons(numberButton)"
-                >{{ numberButton }}</v-btn
+                ><span :style="{ color: 'black' }">{{
+                  numberButton
+                }}</span></v-btn
               >
             </div>
             <div class="d-flex flex-row justify-space-between key--row--last">
               <v-btn
                 class="key--btn"
-                color="sbdLightGrey"
+                :color="color"
                 outlined
                 block
+                large
                 @click="() => captureButtons('0')"
-                >0</v-btn
+                ><span :style="{ color: 'black' }">0</span></v-btn
               >
               <v-btn
                 class="key--btn"
-                color="sbdLightGrey"
+                :color="color"
                 outlined
                 block
+                large
                 @click.stop="clear"
-                >CLEAR</v-btn
+                ><span :style="{ color: 'black' }">CLEAR</span></v-btn
               >
             </div>
           </div>
-          <!-- </v-card-actions> -->
         </v-card>
       </div>
     </v-dialog>
@@ -186,6 +195,10 @@ export default {
       type: String,
       required: true,
     },
+    color: {
+      type: String,
+      required: true,
+    },
     label: String,
     time24hr: Boolean,
   },
@@ -203,7 +216,7 @@ export default {
       ],
       tabUnderlineIndex: 0,
       currentTab: 'hours',
-      items: [{ tab: 'hours' }, { tab: 'minutes' }],
+      time: ['hours', 'minutes'],
       keyPad: [
         ['1', '2', '3'],
         ['4', '5', '6'],
@@ -239,7 +252,9 @@ export default {
       }, 0)
     },
     _emitTime() {
-      this.returnTime = `${this.hour}:${this.minute}`
+      this.returnTime = this.time24hr
+        ? `${this.hour}:${this.minute}`
+        : `${this.hour}:${this.minute} ${this.timeAmPm}`
     },
     currentTabHandler(tab) {
       this.tabUnderlineIndex = 1
@@ -287,7 +302,7 @@ export default {
     clear() {
       this.minute = '00'
       this.hour = '00'
-      this._emitTime()
+      this.returnTime = ''
     },
   },
 }
@@ -301,6 +316,7 @@ export default {
 /* Label prop */
 .label--prop {
   position: absolute;
+  /* top: 50px; */
   color: black;
   padding-left: 6px;
   white-space: nowrap;
@@ -337,6 +353,7 @@ export default {
 /* Close modal icon */
 .times--icon {
   position: absolute;
+  /* top: 26px; */
   display: block;
   left: 80%;
   padding: 6px;
@@ -368,7 +385,7 @@ export default {
   padding-left: 6px;
   padding-right: 6px;
   position: relative;
-  top: 35px;
+  top: 30px;
   user-select: none;
 }
 
@@ -407,21 +424,23 @@ export default {
 .time--text
   > .v-input__control
   > .v-input__slot
-  > .v-text-field__slot
-  > .theme--dark.v-label {
-  color: black !important;
+  > .v-select__slot
+  > .v-select__selections {
+  /* color: black !important; */
+  font-size: 50px;
+  /* top: 14px; */
+  /* position: absolute; */
 }
 
 .time--text
   > .v-input__control
   > .v-input__slot
   > .v-select__slot
-  > .v-select__selections {
-  color: black !important;
-  font-size: 42px;
-  top: 14px;
-  position: absolute;
+  > .v-select__selections
+  > .v-select__selection--comma {
+  overflow: inherit;
 }
+
 .time--text
   > .v-input__control
   > .v-input__slot
@@ -432,51 +451,19 @@ export default {
   display: none;
 }
 
-/* Tab placement */
-.tabs--placement--underline--onload
-  > .v-tabs__bar
-  > .v-tabs__wrapper
-  > .v-tabs__container
-  > .v-tabs__slider-wrapper {
-  width: 80px !important;
-  margin-left: 40px !important;
-  left: var(--tab-placement-underline);
-  left: 49px !important;
-}
-
-.tabs--placement--underline
-  > .v-tabs__bar
-  > .v-tabs__wrapper
-  > .v-tabs__container
-  > .v-tabs__slider-wrapper {
-  width: 80px !important;
-  margin-left: 40px !important;
-  left: var(--tab-placement-underline);
-}
-
-.tab--placement-0 {
-  position: absolute;
-  left: 13.5%;
-}
-
-.tab--placement-1 {
-  position: absolute;
-  left: 42.5%;
-}
-
 /* Key Pad */
 .key--pad {
   width: 100%;
 }
 
 .key--row {
-  padding: 5px 10px 5px 10px;
-  max-width: 126px;
+  padding: 2px 10px 2px 10px;
+  max-width: 139px;
 }
 
 .key--row--last {
-  padding: 5px 10px 5px 10px;
-  max-width: 183px;
+  padding: 2px 10px 2px 10px;
+  max-width: 202px;
 }
 
 .key--btn {
