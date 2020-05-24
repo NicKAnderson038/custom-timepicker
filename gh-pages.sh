@@ -6,7 +6,7 @@ echo "📰 Github pages path: $newPath"
 # node --print 'process.env.PUBLIC_PATH'
 
 ### Build application
-echo "📦 Build application"
+echo "📦 Building application"
 yon build
 echo "🏁 Build complete"
 
