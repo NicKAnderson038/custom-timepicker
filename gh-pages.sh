@@ -1,4 +1,4 @@
-echo "⚙️ Begin deployment"
+echo "⚙️  Begin deployment"
 
 # UPDATE with application name
 newPath='/custom-timepicker/'
@@ -19,7 +19,7 @@ git push origin --delete gh-pages
 
 git rm -r --cached dist
 
-git add -f dist && git commit -m "Initial dist subtree commit" --no-verify
+git add dist && git commit -m "Initial dist subtree commit" --no-verify
 
 git subtree push --prefix dist origin gh-pages
 
