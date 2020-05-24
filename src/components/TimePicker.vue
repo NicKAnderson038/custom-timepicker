@@ -16,13 +16,26 @@
               color="black"
               class="caret times--icon"
               @click.stop="show = false"
-            >fas fa-times-circle</v-icon>
+              >fas fa-times-circle</v-icon
+            >
             <div class="d-flex flex-row justify-center">
-              <v-btn icon class="caret" @click="() => changeTime('INCREASE', 'hour', maxTime)">
-                <v-icon color="black" class="caret--size">fas fa-caret-up</v-icon>
+              <v-btn
+                icon
+                class="caret"
+                @click="() => changeTime('INCREASE', 'hour', maxTime)"
+              >
+                <v-icon color="black" class="caret--size"
+                  >fas fa-caret-up</v-icon
+                >
               </v-btn>
-              <v-btn icon class="caret" @click="() => changeTime('INCREASE', 'minute', '60')">
-                <v-icon color="black" class="caret--size">fas fa-caret-up</v-icon>
+              <v-btn
+                icon
+                class="caret"
+                @click="() => changeTime('INCREASE', 'minute', '60')"
+              >
+                <v-icon color="black" class="caret--size"
+                  >fas fa-caret-up</v-icon
+                >
               </v-btn>
             </div>
           </div>
@@ -62,36 +75,71 @@
               `${color} text-uppercase headline text-xs-center yellow-height-caret yellow-height-caret-last`
             "
           >
-            <v-radio-group v-if="!time24hr" v-model="timeAmPm" column class="am--pm--radios">
-              <v-radio color="black" class="am--pm--radio" label="AM" value="AM"></v-radio>
-              <v-radio color="black" class="am--pm--radio" label="PM" value="PM"></v-radio>
+            <v-radio-group
+              v-if="!time24hr"
+              v-model="timeAmPm"
+              column
+              class="am--pm--radios"
+            >
+              <v-radio
+                color="black"
+                class="am--pm--radio"
+                label="AM"
+                value="AM"
+              ></v-radio>
+              <v-radio
+                color="black"
+                class="am--pm--radio"
+                label="PM"
+                value="PM"
+              ></v-radio>
             </v-radio-group>
             <div class="d-flex flex-row justify-center">
-              <v-btn icon class="caret" @click="() => changeTime('DECREASE', 'hour', maxTime)">
-                <v-icon color="black" class="caret--size">fas fa-caret-down</v-icon>
+              <v-btn
+                icon
+                class="caret"
+                @click="() => changeTime('DECREASE', 'hour', maxTime)"
+              >
+                <v-icon color="black" class="caret--size"
+                  >fas fa-caret-down</v-icon
+                >
               </v-btn>
-              <v-btn icon class="caret" @click="() => changeTime('DECREASE', 'minute', '60')">
-                <v-icon color="black" class="caret--size">fas fa-caret-down</v-icon>
+              <v-btn
+                icon
+                class="caret"
+                @click="() => changeTime('DECREASE', 'minute', '60')"
+              >
+                <v-icon color="black" class="caret--size"
+                  >fas fa-caret-down</v-icon
+                >
               </v-btn>
             </div>
           </v-card-text>
           <div class="key--pad">
             <div class="d-flex flex-row justify-center">
               <v-btn
+                :style="{ left: '4px' }"
                 class="key--btn"
                 text
                 color="orange"
                 @click="() => currentTabHandler(time[0])"
-              >{{ time[0] }}</v-btn>
+                >{{ time[0] }}</v-btn
+              >
               <v-btn
+                :style="{ left: '7px' }"
                 class="key--btn"
                 text
                 color="orange"
                 @click="() => currentTabHandler(time[1])"
-              >{{ time[1] }}</v-btn>
+                >{{ time[1] }}</v-btn
+              >
             </div>
             <div class="key--rows">
-              <div class="key--row" v-for="(numberButtons, i) in keyPad" :key="`row-${i}-main`">
+              <div
+                class="key--row"
+                v-for="(numberButtons, i) in keyPad"
+                :key="`row-${i}-main`"
+              >
                 <v-btn
                   class="key--btn"
                   v-for="numberButton in numberButtons"
@@ -120,8 +168,8 @@
                 block
                 large
                 @click="
-                    () => (i === 0 ? captureButtons(numberButton) : clear())
-                  "
+                  () => (i === 0 ? captureButtons(numberButton) : clear())
+                "
               >
                 <span :style="{ color: 'black' }">{{ numberButton }}</span>
               </v-btn>
@@ -267,6 +315,7 @@ export default {
 <style>
 .time--container {
   max-width: 400px;
+  overflow-x: hidden;
 }
 
 /* Label prop */
@@ -318,7 +367,7 @@ export default {
   position: absolute;
   display: inline;
   left: 80%;
-  top: 13%;
+  top: 17.5%;
 }
 
 .am--pm--radio > .v-input--selection-controls__input > i {

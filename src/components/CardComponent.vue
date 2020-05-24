@@ -10,9 +10,9 @@
       </v-img>
 
       <v-card-subtitle class="pb-0">
-        <v-icon class="caret--size">mdi-clock</v-icon
-        >{{ subTitle }}</v-card-subtitle
-      >
+        <v-icon class="caret--size">mdi-clock</v-icon>
+        {{ subTitle }}
+      </v-card-subtitle>
 
       <v-card-text class="text--primary">
         <ul v-for="feature in features" :key="feature.replace(/ /, '-')">
@@ -21,21 +21,51 @@
       </v-card-text>
 
       <v-card-actions>
-        <v-text-field :label="labels[0]" :color="color[0]" :value="timePicker1">
-        </v-text-field>
+        <v-text-field
+          :label="labels[0]"
+          :color="color[0]"
+          :value="timePicker1"
+        ></v-text-field>
         <TimePicker
           v-model="timePicker1"
           :label="labels[0]"
           :time24hr="true"
           :color="color[0]"
         />
-        <v-text-field :label="labels[1]" :color="color[1]" :value="timePicker2">
-        </v-text-field>
+        <v-text-field
+          :label="labels[1]"
+          :color="color[1]"
+          :value="timePicker2"
+        ></v-text-field>
+        <TimePicker
+          v-model="timePicker2"
+          :label="labels[0]"
+          :time24hr="true"
+          :color="color[1]"
+        />
+      </v-card-actions>
+      <v-card-actions>
+        <v-text-field
+          :label="labels[0]"
+          :color="color[2]"
+          :value="timePicker1"
+        ></v-text-field>
+        <TimePicker
+          v-model="timePicker1"
+          :label="labels[0]"
+          :time24hr="false"
+          :color="color[2]"
+        />
+        <v-text-field
+          :label="labels[1]"
+          :color="color[3]"
+          :value="timePicker2"
+        ></v-text-field>
         <TimePicker
           v-model="timePicker2"
           :label="labels[0]"
           :time24hr="false"
-          :color="color[1]"
+          :color="color[3]"
         />
       </v-card-actions>
     </v-card>
