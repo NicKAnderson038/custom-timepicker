@@ -39,13 +39,13 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ```bash
 npm run build || yarn build
 
+# (Skip if first deployment) rm gh-pages and redo steps above for changes
+git push origin --delete gh-pages
+
 # comment out publicPath: '/my-app-name/' before running this command
 git add dist && git commit -m "Initial dist subtree commit" --no-verify
 
 git subtree push --prefix dist origin gh-pages
-
-# rm gh-pages and redo steps above for changes
-git push origin --delete gh-pages
 ```
 
 #
