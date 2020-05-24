@@ -1,6 +1,6 @@
 publicPath="$(git config --get remote.origin.url | sed 's:.*/::' | cut -f1 -d".")"
 export PUBLIC_PATH="/$publicPath/"
-echo "📰 Github pages path: $publicPath"
+echo "📰 Github pages path: /$publicPath/"
 
 echo "📦 Building application"
 vue-cli-service build
