@@ -26,6 +26,7 @@ git subtree push --prefix dist origin gh-pages
 echo "Deployment complete 📦"
 echo "and"
 echo "Delete dist folder 📁"
+git rm -r --cached dist
 rm -r -v dist
 
 exit 0
