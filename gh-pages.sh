@@ -27,5 +27,8 @@ git subtree push --prefix dist origin gh-pages
 rm -r -v dist
 
 git rm -r --cached
+
+git add .
+git commit -m "cleaned cache"
 exit 0
 read
