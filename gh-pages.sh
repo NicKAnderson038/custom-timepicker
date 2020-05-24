@@ -10,11 +10,8 @@ export PUBLIC_PATH='/'
 echo "🔙 restore path"
 
 echo "🚀 Begin deployment"
-### (Skip if first deployment) rm gh-pages and redo steps above for changes
 git push origin --delete gh-pages
-
 git add -f dist && git commit -m "Initial dist subtree commit" --no-verify
-
 git subtree push --prefix dist origin gh-pages
 
 echo "🛁 Clean up process"
