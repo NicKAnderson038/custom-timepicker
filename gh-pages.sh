@@ -22,12 +22,12 @@ git add -f dist && git commit -m "Initial dist subtree commit" --no-verify
 
 git subtree push --prefix dist origin gh-pages
 
+### Local clean up process
 rm -r -v dist
-
 git rm -r --cached dist
-
 git add .
 git commit -m "cleaned cache"
 git push
+
 exit 0
 read
