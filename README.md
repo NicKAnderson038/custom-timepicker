@@ -34,8 +34,6 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 2. Include `publicPath: process.env.PUBLIC_PATH || '/'` to the `vue.config.js` file.
 
-3. Update the `publicPath` var with github application name in the `gh-pages.sh` file.
-
-4. Run `yarn pages`, `npm run pages` or `bash gh-pages.sh` for deployment to github pages.
+3. Run `yarn pages`, `npm run pages` or `bash gh-pages.sh` for deployment to github pages.
 
 #
