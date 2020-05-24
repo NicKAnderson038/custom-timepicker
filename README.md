@@ -28,11 +28,11 @@ yarn lint || npm run lint
 
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
-### Deploying to GitHub [Pages](https://nickanderson038.github.io/custom-timepicker/).
+### Deploying to [GitHub Pages](https://nickanderson038.github.io/custom-timepicker/).
 
 1. Follow <a href="https://medium.com/@Roli_Dori/deploy-vue-cli-3-project-to-github-pages-ebeda0705fbd" target="_blank">instructions</a> on deployment.
 
-2. Update the `publicPath` with application name in the `vue.config.js` file.
+2. Update the `publicPath` with github application name in the `vue.config.js` file.
 
 3. Run `yarn pages` or `npm run pages` for deployment to github pages.
 
