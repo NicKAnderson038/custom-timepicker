@@ -5,7 +5,7 @@ export PUBLIC_PATH=$publicPath
 echo "📰 Github pages path: $publicPath"
 
 echo "📦 Building application"
-npm run build
+vue-cli-service build
 echo "🏁 Build complete"
 
 export PUBLIC_PATH='/'
