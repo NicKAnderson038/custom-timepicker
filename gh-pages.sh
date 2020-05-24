@@ -24,7 +24,7 @@ git add -f dist && git commit -m "Initial dist subtree commit" --no-verify
 git subtree push --prefix dist origin gh-pages
 
 echo "Deployment complete 📦"
-echo "and"
+echo "  &&"
 echo "Delete dist folder 📁"
 git rm -r --cached dist
 rm -r -v dist
