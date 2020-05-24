@@ -25,5 +25,7 @@ git add dist && git commit -m "Initial dist subtree commit" --no-verify
 git subtree push --prefix dist origin gh-pages
 
 rm -r -v dist
+
+git rm -r --cached
 exit 0
 read
