@@ -1,17 +1,19 @@
-echo "⚙️  Begin deployment"
+echo "🚀 Begin deployment"
 
 # UPDATE with application name
 newPath='/custom-timepicker/'
 
 export PUBLIC_PATH=$newPath
-echo "📰 GITHUB PAGES PATH: $newPath"
+echo "📰 Github pages path: $newPath"
 # node --print 'process.env.PUBLIC_PATH'
 
 ### Build application
+echo "⚙️  Build application"
 yon build
+echo "📦 Build complete"
 
 export PUBLIC_PATH='/'
-echo "🔙 RESTORED PATH"
+echo "🔙 restore path"
 # node --print 'process.env.PUBLIC_PATH'
 
 ### (Skip if first deployment) rm gh-pages and redo steps above for changes
@@ -23,9 +25,7 @@ git add dist && git commit -m "Initial dist subtree commit" --no-verify
 
 git subtree push --prefix dist origin gh-pages
 
-echo "📦 Deployment complete"
-echo "📁 Delete dist folder"
 rm -r -v dist
-
+echo "🏁 Deployment complete"
 exit 0
 read
