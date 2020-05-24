@@ -18,15 +18,13 @@ echo "🚀 Begin deployment"
 ### (Skip if first deployment) rm gh-pages and redo steps above for changes
 git push origin --delete gh-pages
 
-# git rm -r --cached dist
-
 git add -f dist && git commit -m "Initial dist subtree commit" --no-verify
 
 git subtree push --prefix dist origin gh-pages
 
 rm -r -v dist
 
-git rm -r --cached
+git rm -r --cached dist
 
 git add .
 git commit -m "cleaned cache"
