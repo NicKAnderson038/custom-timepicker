@@ -1,11 +1,10 @@
-# UPDATE with application name
+### UPDATE with application name
 newPath='/custom-timepicker/'
 
 export PUBLIC_PATH=$newPath
 echo "📰 Github pages path: $newPath"
 # node --print 'process.env.PUBLIC_PATH'
 
-### Build application
 echo "📦 Building application"
 yon build
 echo "🏁 Build complete"
@@ -22,7 +21,7 @@ git add -f dist && git commit -m "Initial dist subtree commit" --no-verify
 
 git subtree push --prefix dist origin gh-pages
 
-### Local clean up process
+echo "🛁 Clean up process"
 rm -r -v dist
 git rm -r --cached dist
 git add .
