@@ -5,7 +5,7 @@ export PUBLIC_PATH=$publicPath
 echo "📰 Github pages path: $publicPath"
 
 echo "📦 Building application"
-yon build
+npm run build
 echo "🏁 Build complete"
 
 export PUBLIC_PATH='/'
