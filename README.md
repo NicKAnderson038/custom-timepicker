@@ -32,8 +32,10 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 1. Follow <a href="https://medium.com/@Roli_Dori/deploy-vue-cli-3-project-to-github-pages-ebeda0705fbd" target="_blank">instructions</a> on deployment.
 
-2. Update the `publicPath` var with github application name in the `gh-pages.sh` file.
+2. Include `publicPath: process.env.PUBLIC_PATH || '/'` to the `vue.config.js` file.
 
-3. Run `yarn pages` or `npm run pages` for deployment to github pages.
+3. Update the `publicPath` var with github application name in the `gh-pages.sh` file.
+
+4. Run `yarn pages`, `npm run pages` or `bash gh-pages.sh` for deployment to github pages.
 
 #
