@@ -30,5 +30,6 @@ git rm -r --cached
 
 git add .
 git commit -m "cleaned cache"
+git push
 exit 0
 read
