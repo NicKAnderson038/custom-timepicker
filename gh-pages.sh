@@ -1,8 +1,8 @@
 ### UPDATE with application name
-newPath='/custom-timepicker/'
+publicPath='/custom-timepicker/'
 
-export PUBLIC_PATH=$newPath
-echo "📰 Github pages path: $newPath"
+export PUBLIC_PATH=$publicPath
+echo "📰 Github pages path: $publicPath"
 
 echo "📦 Building application"
 yon build
