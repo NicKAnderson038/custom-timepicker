@@ -1,22 +1,20 @@
-echo "Begin deployment ⚙️"
+echo "⚙️ Begin deployment"
 
 # UPDATE with application name
 newPath='/custom-timepicker/'
 
-restoredPath='/'
-
 export PUBLIC_PATH=$newPath
-echo "GITHUB PAGES PATH 📰: $newPath"
+echo "📰 GITHUB PAGES PATH: $newPath"
 # node --print 'process.env.PUBLIC_PATH'
 
-# Build application
+### Build application
 yon build
 
-export PUBLIC_PATH=$restoredPath
-echo "RESTORED PATH 🔙: $restoredPath"
+export PUBLIC_PATH='/'
+echo "🔙 RESTORED PATH"
 # node --print 'process.env.PUBLIC_PATH'
 
-# (Skip if first deployment) rm gh-pages and redo steps above for changes
+### (Skip if first deployment) rm gh-pages and redo steps above for changes
 git push origin --delete gh-pages
 
 git rm -r --cached dist
@@ -25,9 +23,8 @@ git add -f dist && git commit -m "Initial dist subtree commit" --no-verify
 
 git subtree push --prefix dist origin gh-pages
 
-echo "Deployment complete 📦"
-echo "  &&"
-echo "Delete dist folder 📁"
+echo "📦 Deployment complete"
+echo "📁 Delete dist folder"
 rm -r -v dist
 
 exit 0
