@@ -22,7 +22,7 @@
               <v-btn
                 icon
                 class="caret"
-                @click="() => changeTime('INCREASE', 'hour', maxTime)"
+                @click="() => changeTime('INCREASE', 'hour', maxTime, true)"
               >
                 <v-icon color="black" class="caret--size"
                   >fas fa-caret-up</v-icon
@@ -31,7 +31,7 @@
               <v-btn
                 icon
                 class="caret"
-                @click="() => changeTime('INCREASE', 'minute', '60')"
+                @click="() => changeTime('INCREASE', 'minute', '60', false)"
               >
                 <v-icon color="black" class="caret--size"
                   >fas fa-caret-up</v-icon
@@ -55,7 +55,7 @@
                 color="black--text"
                 class="black--text time--text"
                 menu-props="auto"
-                hide-details
+                @change="timeSelected = true"
               ></v-select>
               <h1 class="colon">:</h1>
               <v-select
@@ -67,6 +67,7 @@
                 color="black--text"
                 class="black--text time--text"
                 menu-props="auto"
+                @change="timeSelected = false"
               ></v-select>
             </div>
           </v-card-text>
@@ -98,7 +99,7 @@
               <v-btn
                 icon
                 class="caret"
-                @click="() => changeTime('DECREASE', 'hour', maxTime)"
+                @click="() => changeTime('DECREASE', 'hour', maxTime, true)"
               >
                 <v-icon color="black" class="caret--size"
                   >fas fa-caret-down</v-icon
@@ -107,7 +108,7 @@
               <v-btn
                 icon
                 class="caret"
-                @click="() => changeTime('DECREASE', 'minute', '60')"
+                @click="() => changeTime('DECREASE', 'minute', '60', false)"
               >
                 <v-icon color="black" class="caret--size"
                   >fas fa-caret-down</v-icon
@@ -294,7 +295,8 @@ export default {
       this[time] = appendNumber(e)
       this._emitTime()
     },
-    changeTime(action, time, max) {
+    changeTime(action, time, max, bool) {
+      this.timeSelected = bool
       if (action === 'INCREASE' && this[time] === max) {
         this[time] = '00'
       } else if (action === 'DECREASE' && this[time] === '00') {
