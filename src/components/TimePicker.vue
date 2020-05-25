@@ -39,7 +39,6 @@
               </v-btn>
             </div>
           </div>
-          <!-- </v-card-text> -->
           <v-card-text
             :class="
               `${color} text-uppercase headline text-xs-center yellow-height`
