@@ -22,7 +22,7 @@
               <v-btn
                 icon
                 class="caret"
-                @click="() => changeTime('INCREASE', 'hour', maxTime, true)"
+                @click="() => changeTime('INCREASE', 'hour', maxTime, false)"
               >
                 <v-icon color="black" class="caret--size"
                   >fas fa-caret-up</v-icon
@@ -31,7 +31,7 @@
               <v-btn
                 icon
                 class="caret"
-                @click="() => changeTime('INCREASE', 'minute', '60', false)"
+                @click="() => changeTime('INCREASE', 'minute', '60', true)"
               >
                 <v-icon color="black" class="caret--size"
                   >fas fa-caret-up</v-icon
@@ -54,7 +54,7 @@
                 color="black--text"
                 class="black--text time--text"
                 menu-props="auto"
-                @change="timeSelected = true"
+                @change="() => updateHourOrMinute('hours', false)"
               ></v-select>
               <h1 class="colon">:</h1>
               <v-select
@@ -66,7 +66,7 @@
                 color="black--text"
                 class="black--text time--text"
                 menu-props="auto"
-                @change="timeSelected = false"
+                @change="() => updateHourOrMinute('minutes', true)"
               ></v-select>
             </div>
           </v-card-text>
@@ -98,7 +98,7 @@
               <v-btn
                 icon
                 class="caret"
-                @click="() => changeTime('DECREASE', 'hour', maxTime, true)"
+                @click="() => changeTime('DECREASE', 'hour', maxTime, false)"
               >
                 <v-icon color="black" class="caret--size"
                   >fas fa-caret-down</v-icon
@@ -107,7 +107,7 @@
               <v-btn
                 icon
                 class="caret"
-                @click="() => changeTime('DECREASE', 'minute', '60', false)"
+                @click="() => changeTime('DECREASE', 'minute', '60', true)"
               >
                 <v-icon color="black" class="caret--size"
                   >fas fa-caret-down</v-icon
@@ -123,8 +123,8 @@
                 text
                 :outlined="timeSelected"
                 color="orange"
-                @click="() => currentTabHandler(time[0])"
-                >{{ time[0] }}</v-btn
+                @click="() => currentTabHandler('hours')"
+                >HOURS</v-btn
               >
               <v-btn
                 :style="{ left: '7px' }"
@@ -132,8 +132,8 @@
                 text
                 :outlined="!timeSelected"
                 color="orange"
-                @click="() => currentTabHandler(time[1])"
-                >{{ time[1] }}</v-btn
+                @click="() => currentTabHandler('minutes')"
+                >MINUTES</v-btn
               >
             </div>
             <div class="key--rows">
@@ -224,7 +224,6 @@ export default {
       ],
       tabUnderlineIndex: 0,
       currentTab: 'hours',
-      time: ['hours', 'minutes'],
       timeSelected: true,
       keyPad: [
         ['1', '4', '7'],
@@ -266,6 +265,10 @@ export default {
         ? `${this.hour}:${this.minute}`
         : `${this.hour}:${this.minute} ${this.timeAmPm}`
     },
+    updateHourOrMinute(time, bool) {
+      this.timeSelected = bool
+      this.currentTabHandler(time)
+    },
     currentTabHandler(tab) {
       this.tabUnderlineIndex = 1
       this.currentTab = tab
@@ -296,6 +299,7 @@ export default {
     },
     changeTime(action, time, max, bool) {
       this.timeSelected = bool
+      this.currentTabHandler(time + 's')
       if (action === 'INCREASE' && this[time] === max) {
         this[time] = '00'
       } else if (action === 'DECREASE' && this[time] === '00') {
