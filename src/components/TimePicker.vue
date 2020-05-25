@@ -121,6 +121,7 @@
                 :style="{ left: '4px' }"
                 class="key--btn"
                 text
+                :outlined="timeSelected"
                 color="orange"
                 @click="() => currentTabHandler(time[0])"
                 >{{ time[0] }}</v-btn
@@ -129,6 +130,7 @@
                 :style="{ left: '7px' }"
                 class="key--btn"
                 text
+                :outlined="!timeSelected"
                 color="orange"
                 @click="() => currentTabHandler(time[1])"
                 >{{ time[1] }}</v-btn
@@ -168,7 +170,10 @@
                 block
                 large
                 @click="
-                  () => (i === 0 ? captureButtons(numberButton) : clear())
+                  () =>
+                    numberButton === '0'
+                      ? captureButtons(numberButton)
+                      : clear(numberButton)
                 "
               >
                 <span :style="{ color: 'black' }">{{ numberButton }}</span>
@@ -220,6 +225,7 @@ export default {
       tabUnderlineIndex: 0,
       currentTab: 'hours',
       time: ['hours', 'minutes'],
+      timeSelected: true,
       keyPad: [
         ['1', '4', '7'],
         ['2', '5', '8'],
@@ -263,6 +269,7 @@ export default {
     currentTabHandler(tab) {
       this.tabUnderlineIndex = 1
       this.currentTab = tab
+      this.timeSelected = !this.timeSelected
     },
     captureButtons(e) {
       const times = this.currentTab
@@ -307,6 +314,8 @@ export default {
       this.minute = '00'
       this.hour = '00'
       this.returnTime = ''
+      this.timeAmPm = 'AM'
+      this.timeSelected = true
     },
   },
 }
