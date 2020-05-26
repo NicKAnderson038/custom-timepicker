@@ -1,6 +1,8 @@
 STR="$(echo `jq '.scripts.build' package.json`)"
 SUB='react'
+account="$(git config --get remote.origin.url | sed 's:.*//github.com/::' | cut -f1 -d"/")"
 publicPath="$(git config --get remote.origin.url | sed 's:.*/::' | cut -f1 -d".")"
+url="https://""$account"".github.io/""$publicPath""/"
 
 echo "📦 Building application"
 if [[ "$STR" == *"$SUB"* ]]
@@ -8,8 +10,8 @@ then
     echo "🏠 set homepage: /$publicPath/"
     echo "`jq '.homepage="'/$publicPath/'"' package.json`" > package.json
     react-scripts build
-    echo "`jq 'del(.homepage)' package.json`" > package.json
-    echo "🔙 package.json restored"
+    # echo "`jq 'del(.homepage)' package.json`" > package.json
+    # echo "🔙 package.json restored"
 else
     echo "🛣️ set public path: /$publicPath/"
     export PUBLIC_PATH="/$publicPath/"
@@ -43,6 +45,9 @@ fi
 git add .
 git commit -m "cleaned cache"
 git push
+
+printf "\n⛅'\e]8;;$url\e\\Github pages url: $publicPath\e]8;;\e\\\'\n"
+echo ""
 
 exit 0
 read
