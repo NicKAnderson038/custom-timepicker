@@ -47,10 +47,7 @@ git commit -m "cleaned cache"
 git push
 
 printf "\n⛅'\e]8;;$url\e\\Github pages url: $publicPath\e]8;;\e\\\'\n"
-echo "🔗"
-echo "https://$account.github.io/$publicPath/"
-echo "$account"
-echo "$publicPath"
+echo "🔗 https://$account.github.io/$publicPath/"
 
 exit 0
 read
