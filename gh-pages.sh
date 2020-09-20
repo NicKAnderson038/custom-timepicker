@@ -48,7 +48,7 @@ git push
 
 printf "\n⛅'\e]8;;$url\e\\Github pages url: $publicPath\e]8;;\e\\\'\n"
 echo "🔗"
-echo "$sccount.github.io/$publicPath/"
+echo "https://$account.github.io/$publicPath/"
 echo "$account"
 echo "$publicPath"
 
